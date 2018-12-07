@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   post   'sign_in'   => 'sessions#create'
   delete 'sign_out'  => 'sessions#destroy'
 
-  post   'upload_documents'   => 'uploads#documents'
+  post   'upload'   => 'users#upload'
 
 end

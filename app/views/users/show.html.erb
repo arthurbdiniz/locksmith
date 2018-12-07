@@ -11,17 +11,7 @@
             <% end %>
             
             </p>
-            <% if @user.documents.attached? %>
-            <p> 
-            <h2>Download Documents</h2>
-            <% @user.documents.each_with_index do |doc, i| %>
-                <p> 
-                <%= link_to("doc #{i}", rails_blob_path(doc, disposition: "attachment")) %>
-                </p>
-            <% end %>
-            </p>
-            <% end %>
-            
+           
         <%end%>
     </body>
   </html>

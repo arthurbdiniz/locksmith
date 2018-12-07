@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize, except: [:new, :create]
-  before_action :correct_user?, only: [:edit, :update, :destroy]
+  before_action :correct_user?, only: [:edit, :update, :destroy, :upload]
 
 
   def show
@@ -33,6 +33,15 @@ class UsersController < ApplicationController
       render action: :edit
     end
   end
+
+  def upload
+    @user = User.find(params[:id]) 
+    if @user.update_attributes(user_params)
+      redirect_to current_user
+    else
+      render action: :edit
+    end
+  end
   
   def destroy
     @user = User.find(params[:id]) 
@@ -44,7 +53,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, documents: [])
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
   end
   
 end
