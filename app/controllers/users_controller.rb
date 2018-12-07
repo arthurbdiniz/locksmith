@@ -2,9 +2,6 @@ class UsersController < ApplicationController
   before_action :authorize, except: [:new, :create]
   before_action :correct_user?, only: [:edit, :update, :destroy]
 
-  def index
-    @users = User.all
-  end
 
   def show
   @user = User.find(params[:id])
@@ -18,9 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       redirect_to @user, notice: "Usuário foi criado com sucesso!"
-      #tire o método de comentário quando criar o helper.
-      #Usuário depois de cadastrar-se acessa o sistema automaticamente
-      # sign_in(@user)
+      sign_in
     else 
       render action: :new
     end
@@ -33,7 +28,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id]) 
     if @user.update_attributes(user_params)
-      redirect_to users_path
+      redirect_to current_user
     else
       render action: :edit
     end
@@ -49,7 +44,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, documents: [])
   end
   
 end

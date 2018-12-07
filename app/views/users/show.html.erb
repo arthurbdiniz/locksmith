@@ -1,12 +1,27 @@
 <html>
     <body>
-        <h3> Perfil de <%= @user.name %> </h3>
-        <%= @user.email %>
         <% if current_user == @user %>
-            <ul>
-                <li><%= link_to "Edit", edit_user_path(current_user) %></li>
-                <li><%= link_to "Delete", @user, method: :delete%></li>
-            </ul>
+            <% if @user.avatar.attached? %>
+                <div>
+                <%= image_tag(@user.avatar, style: 'width: 50px;') %>
+                <h3> Perfil de <%= @user.name %> </h3>
+                </div>
+                <%= @user.email %>
+                
+            <% end %>
+            
+            </p>
+            <% if @user.documents.attached? %>
+            <p> 
+            <h2>Download Documents</h2>
+            <% @user.documents.each_with_index do |doc, i| %>
+                <p> 
+                <%= link_to("doc #{i}", rails_blob_path(doc, disposition: "attachment")) %>
+                </p>
+            <% end %>
+            </p>
+            <% end %>
+            
         <%end%>
     </body>
   </html>
