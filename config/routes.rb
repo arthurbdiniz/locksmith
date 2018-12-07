@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   #root :to => "home#index"
-  root :to => 'sessions#new'
+  # root :to => 'sessions#new'
+  root 'sessions#new'
   resources :users
   get    'sign_in'   => 'sessions#new'
   post   'sign_in'   => 'sessions#create'
