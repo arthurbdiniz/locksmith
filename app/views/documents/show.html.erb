@@ -15,6 +15,7 @@
 <%= link_to("gpg", rails_blob_path(@document.file, disposition: "attachment")) %>
 </p>
 
+
 <%= text_area(:comment, :text, size: "20x30", id: 'mytext') %>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
