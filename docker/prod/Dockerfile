@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.3
 
 RUN apt-get update -qq && apt-get install -y \
     build-essential \
@@ -15,6 +15,6 @@ RUN bundle install
 
 COPY . /locksmith
 
-RUN chmod +x script/start-dev.sh
+RUN chmod +x script/start-prod.sh
 
 EXPOSE  3000
